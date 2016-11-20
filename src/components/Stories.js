@@ -6,7 +6,8 @@ class Stories extends Component {
     super();
 
     this.state = {
-      stories: undefined
+      stories: undefined,
+      valueName: undefined
     };
   }
 
@@ -17,8 +18,12 @@ class Stories extends Component {
 
     fetch(url)
       .then(response => response.json())
-      .then(stories => {
-        this.setState({ stories: stories.stories });
+      .then(data => {
+        debugger
+        this.setState({
+          stories: data.stories,
+          valueName: data.name
+        });
       })
       .catch(error => {
         console.error(error);
@@ -28,12 +33,13 @@ class Stories extends Component {
     render() {
       var storyData = this.state.stories;
       var valuesId = this.props.params.storiesid;
+      var valueName = this.state.valueName;
       
       return (
         <div>
           <Link to={"/"}> [Back] </Link>
           <Link to={"/newstory"}> [Add your story] </Link>
-          <h1> {valuesId} </h1>
+          <h1> {valueName} </h1>
 
           {this.state.stories ? storyData.map(function(story){
               return (
