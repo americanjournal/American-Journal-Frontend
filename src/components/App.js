@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../index.css'
 import ValueList from './ValueList';
-import logo from './logo.png';
+import Topbar from './Topbar'
 
 class App extends Component {
   constructor(props){
@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <img src={logo} height="42px" width="42px" />
+      <Topbar />
       <ValueList valueListData={this.state.values} />
         {this.props.children}
       </div>

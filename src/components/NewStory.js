@@ -67,7 +67,9 @@ class NewStory extends Component {
     const placeholderText = "Add your story here"
 
     const textAreaStyle = {
-      "width": "100%"
+      "width": "100%",
+      "font": "inherit",
+      "height": "160px"
     }
 
     const buttonStyle = {
@@ -76,10 +78,12 @@ class NewStory extends Component {
       "line-height": "36px",
       "color": "white",
       "background-color": "rgb(24, 67, 161)",
-      "font-size": "18px",
+      "font-size": "24px",
       "border": "none",
       "border-radius": "5px",
+      "font": "inherit"
     }
+
     const formStyle = {
       "text-align": "center",
     }
@@ -92,7 +96,7 @@ class NewStory extends Component {
 
           <form onSubmit={this.handleSubmit} style={formStyle}>
           <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
-          <input type="submit" value="Submit" style={buttonStyle} />
+          <input type="submit" value="Submit Story" style={buttonStyle} />
         </form>
       </div>
     )
