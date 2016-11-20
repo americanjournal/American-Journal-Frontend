@@ -15,8 +15,8 @@ ReactDOM.render(
         <Route path='/' component={App}>
         <IndexRoute component={ValueList}></IndexRoute>
         </Route>
-        <Route path=':storiesid' component={Stories}></Route>
-        <Route path=':storiesid/:storyid' component={Story}></Route>
+        <Route path='stories/:storiesid' component={Stories}></Route>
+        <Route path='stories/:storiesid/:storyid' component={Story}></Route>
         <Route path='newstory' component={NewStory}></Route>
     </Router>,
   htmlroot

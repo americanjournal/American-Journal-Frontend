@@ -37,6 +37,7 @@ class NewStory extends Component {
         <div>
         <Link to="/"> [Back] </Link>
         <h1> New Story!!! </h1>
+        <h2> Select value, and write your story! </h2>
         </div>
         )
   }

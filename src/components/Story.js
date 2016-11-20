@@ -36,7 +36,7 @@ class Story extends Component {
       
       return (
         <div>
-        <Link to={"/"+valuesId}> [Back] </Link>
+        <Link to={"/stories/"+valuesId}> [Back] </Link>
         <Link to={"/newstory"}> [Add your story] </Link>
         <h1> {this.state.story ? this.state.story.story.text : undefined} </h1>
         </div>

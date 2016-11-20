@@ -17,7 +17,7 @@ class ValueList extends Component {
       <h1> Values </h1>
       <ul>
       {this.state.values.map(function(personalValue){
-        return <li><Link to={"/"+personalValue}>{personalValue}</Link></li>
+        return <li><Link to={"/stories/"+personalValue}>{personalValue}</Link></li>
       })}
       </ul>
 
