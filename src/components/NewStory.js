@@ -6,7 +6,7 @@ class NewStory extends Component {
     super();
 
     this.state = {
-      story: "HIP HOP THIS IS A MUTHAFUCKING STORY"
+      story: undefined
     };
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -64,6 +64,7 @@ class NewStory extends Component {
   render() {
     const prompt = this.state.prompt
     const valueName = this.state.valueName
+    const placeholderText = "Add your story here"
 
     const textAreaStyle = {
       "width": "100%"
@@ -76,7 +77,7 @@ class NewStory extends Component {
         <h2> {prompt} </h2>
 
         <form onSubmit={this.handleSubmit}>
-          <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle}/>
+          <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
           <input type="submit" value="Submit" />
         </form>
       </div>
