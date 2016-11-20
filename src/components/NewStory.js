@@ -70,15 +70,29 @@ class NewStory extends Component {
       "width": "100%"
     }
 
+    const buttonStyle = {
+      "width": "80%",
+      "height": "36px",
+      "line-height": "36px",
+      "color": "white",
+      "background-color": "rgb(24, 67, 161)",
+      "font-size": "18px",
+      "border": "none",
+      "border-radius": "5px",
+    }
+    const formStyle = {
+      "text-align": "center",
+    }
+
     return (
       <div>
         <Link to="/"> [Back] </Link>
         <h1> {valueName} </h1>
         <h2> {prompt} </h2>
 
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} style={formStyle}>
           <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" style={buttonStyle} />
         </form>
       </div>
     )
