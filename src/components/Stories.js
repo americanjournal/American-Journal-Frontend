@@ -11,48 +11,38 @@ class Stories extends Component {
   }
 
   componentWillMount() {
-    const valueMap = {'economy': 1, 'immigration':2, 'security':3};
-    var apiValueKey = valueMap[this.props.params.storiesid];
-    // console.log(apiValueKey);
-
+    const valueId = this.props.params.storiesid
     const host = 'https://fast-fjord-29570.herokuapp.com/';
-    const url = `${host}values/${apiValueKey}.json`;
-    console.log(url);
-    fetch(url)
-    .then(response => response.json())
-    .then(stories => {
-      this.setState({ stories: stories.stories });
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    const url = `${host}values/${valueId}.json`;
 
-    // this.setState({ stories: fixtureStories.stories }, () => {
-    //   console.log(this.state.stories);
-    // });
-  }
+    fetch(url)
+      .then(response => response.json())
+      .then(stories => {
+        this.setState({ stories: stories.stories });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+
     render() {
       var storyData = this.state.stories;
-      // console.log('StoryData')
-      // console.log(storyData)
-
       var valuesId = this.props.params.storiesid;
       
       return (
         <div>
-        <Link to={"/"}> [Back] </Link>
-        <Link to={"/newstory"}> [Add your story] </Link>
-        <h1> {valuesId} </h1>
+          <Link to={"/"}> [Back] </Link>
+          <Link to={"/newstory"}> [Add your story] </Link>
+          <h1> {valuesId} </h1>
 
-        {this.state.stories ? storyData.map(function(aStory){
-          return (
-             <p><Link to={"/stories/"+valuesId+"/"+aStory.id}>{aStory.story}</Link></p>
-            )
-        }) : undefined}
-
+          {this.state.stories ? storyData.map(function(story){
+              return (
+                <p><Link to={"/stories/"+valuesId+"/"+story.id}>{story.story}</Link></p>
+              )
+          }) : undefined}
         </div>
-        )
-  }
+      )
+    }
 }
 
 export default Stories;
