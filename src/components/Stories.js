@@ -46,7 +46,7 @@ class Stories extends Component {
 
         {this.state.stories ? storyData.map(function(aStory){
           return (
-             <p><Link to={"/values/"+valuesId+"/story/"+aStory.id}>{aStory.story}</Link></p>
+             <p><Link to={"/"+valuesId+"/"+aStory.id}>{aStory.story}</Link></p>
             )
         }) : undefined}
 
