@@ -63,10 +63,13 @@ class NewStory extends Component {
 
   render() {
     const prompt = this.state.prompt
+    const valueName = this.state.valueName
     return (
       <div>
         <Link to="/"> [Back] </Link>
-        <h1> {prompt} </h1>
+        <h1> {valueName} </h1>
+        <h2> {prompt} </h2>
+
         <form onSubmit={this.handleSubmit}>
           <textarea value={this.state.story} onChange={this.handleTextChange} />
           <input type="submit" value="Submit" />
