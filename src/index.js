@@ -17,7 +17,7 @@ ReactDOM.render(
         </Route>
         <Route path='stories/:storiesid' component={Stories}></Route>
         <Route path='stories/:storiesid/:storyid' component={Story}></Route>
-        <Route path='newstory' component={NewStory}></Route>
+        <Route path='newstory/:valueId' component={NewStory}></Route>
     </Router>,
   htmlroot
 );
