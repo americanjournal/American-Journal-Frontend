@@ -64,6 +64,11 @@ class NewStory extends Component {
   render() {
     const prompt = this.state.prompt
     const valueName = this.state.valueName
+
+    const textAreaStyle = {
+      "width": "100%"
+    }
+
     return (
       <div>
         <Link to="/"> [Back] </Link>
@@ -71,7 +76,7 @@ class NewStory extends Component {
         <h2> {prompt} </h2>
 
         <form onSubmit={this.handleSubmit}>
-          <textarea value={this.state.story} onChange={this.handleTextChange} />
+          <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle}/>
           <input type="submit" value="Submit" />
         </form>
       </div>
