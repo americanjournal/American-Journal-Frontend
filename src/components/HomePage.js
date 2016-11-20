@@ -1,16 +1,61 @@
 import React, { Component } from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
+import addbutton from './addbutton.png';
+
+const contDiv = {
+  "margin":"auto",
+  "padding":"auto"
+}
+
+const halfDiv = {
+  "width" : "50%",
+  "float" : "left"
+}
 
 const storyStyle1 = {
-      "width": "100%",
-      "height": "36px",
+      "width": "95%",
+      "height": "150px",
+      "overflow" : "hidden",
       "line-height": "36px",
-      "color": "white",
-      "background-color": "rgb(24, 67, 161)",
-      "font-size": "18px",
-      "border": "none",
+      "font-size": "13px",
+      "border" : "1px solid black",
+      "box-shadow": "5px 5px 2px #888888",
       "border-radius": "5px",
+      "padding": "5px 5px 5px 5px",
+      "margin": "3px 3px 3px 3px"
     }
+
+const storyStyleA = {
+      "width": "90%",
+      "height": "300px",
+      "overflow" : "hidden",
+      "line-height": "36px",
+      "font-size": "13px",
+      "border" : "1px solid black",
+      "box-shadow": "5px 5px 2px #888888",
+      "border-radius": "5px",
+      "padding": "5px 5px 5px 5px",
+      "margin": "3px 3px 3px 3px",
+      "float": "left"
+    }
+
+const storyStyleB = {
+      "width": "90%",
+      "height": "150px",
+      "overflow" : "hidden",
+      "line-height": "36px",
+      "font-size": "8px",
+      "border" : "1px solid black",
+      "box-shadow": "5px 5px 2px #888888",
+      "border-radius": "5px",
+      "padding": "5px 5px 5px 5px",
+      "margin": "3px 3px 3px 3px",
+      "float": "left"
+    }
+
+const addButtonStyle = {
+  "text-align": "center"
+}
 
 class HomePage extends Component {
   constructor() {
@@ -37,6 +82,29 @@ class HomePage extends Component {
       });
     }
 
+    addButton(){
+      return (
+        <div style={addButtonStyle}>
+        <p></p>
+        <Link to={"/newstory/1"}>
+        <img src={addbutton} height="50%" width="50%" />
+        <p>Add your story</p>
+        </Link>
+        </div>
+        )
+    }
+
+    styleStories(storyList) {
+      storyList.map(function(story, idx){
+        if (idx % 2 == 0){
+          return <div style={storyStyleA}>{story}</div>
+        }
+        else {
+          return <div style={storyStyleB}>{story}</div>
+        }
+      })
+    }
+
     displayStories() {
       var storyData = this.state.stories;
       var valuesId = this.props.params.storiesid;
@@ -48,22 +116,30 @@ class HomePage extends Component {
       var story5 = storyData[4].story;
 
       return (
-        <div>
+        <div style={contDiv}>
+
         <div style={storyStyle1}>
         {story1}
         </div>
 
-        <div style={storyStyle1}>
+        <div style={halfDiv}>
+        <div style={storyStyleB}>
+        {this.addButton()}
+        </div>
+        <div style={storyStyleA}>
         {story2}
         </div>
+        </div>
 
-        <div style={storyStyle1}>
+        <div style={halfDiv}>
+        <div style={storyStyleA}>
         {story3}
         </div>
-
-        <div style={storyStyle1}>
+        <div style={storyStyleB}>
         {story4}
         </div>
+        </div>
+
         </div>
         )
     }
@@ -74,10 +150,8 @@ class HomePage extends Component {
       
       return (
         <div>
-          <Link to={"/newstory"}> [Add your story] </Link>
-           <h3> American Journal </h3>
-          <h2> JUSTICE </h2>
-          <p> My beliefs in justice come from... </p>
+          <h3> JUSTICE </h3>
+          <p> My beliefs in justice come from my experience with... </p>
           {this.state.stories ? this.displayStories() : undefined }
         </div>
       )
