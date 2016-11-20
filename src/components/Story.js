@@ -86,8 +86,8 @@ class Story extends Component {
 
       return (
         <div>
-          <Link to={"/stories/${valuesId}"}> [Back] </Link>
-          <Link to={"\/newstory"}> [Add your story] </Link>
+          <Link to={`/stories/${valuesId}`}> [Back] </Link>
+          <Link to={"{\/newstory}"}> [Add your story] </Link>
           <h1 style={headerStyle}>{this.headerText()}</h1>
           <div style={storyContainerStyle}>
             <span style={promptStyle}>{this.state.value ? this.state.value.prompt : undefined}</span>
