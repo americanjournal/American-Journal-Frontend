@@ -19,7 +19,6 @@ class Stories extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        debugger
         this.setState({
           stories: data.stories,
           valueName: data.name
