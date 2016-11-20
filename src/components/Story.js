@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ReactionList } from './ReactionList.js'
+
 import { Link } from 'react-router';
 
 class Story extends Component {
@@ -49,55 +51,35 @@ class Story extends Component {
 
     render() {
       var headerStyle = {
-        'text-align': "center",
+        textAlign: "center",
         fontSize: 32,
         color: "rgb(98, 113, 122)"
       }
 
       var storyContainerStyle = {
-        "text-align": "justify",
+        textAlign: "justify",
         padding: "0 25px",
         fontSize: 16,
-        color: "rgb(98, 113, 122)"
-
+        color: "rgb(98, 113, 122)",
+        marginBottom: "50px"
       }
       var promptStyle = {
-        "font-weight": "bold" 
-      }
-
-      var reactionSectionStyle = {
-        "background-color": "rgba(216, 223, 227, 0.48)",
-        padding: 0
-      }
-
-      var reactionHeaderStyle = {
-        color: "rgb(98, 113, 122)"
-      }
-      
-      var reactionStyle = {
-        'background-color': 'white',
-        'border-radius': '5px',
-        
-
+        fontWeight: "bold" 
       }
 
       var valuesId = this.props.params.storiesid
-      var reactions = ["respect for the writer", "sad", "surprised", "hopeful", "happy", "angry", "disgusted", "sorry"]
 
       return (
         <div>
-          <Link to={`/stories/${valuesId}`}> [Back] </Link>
-          <Link to={"{\/newstory}"}> [Add your story] </Link>
+          <Link to={`/stories/${valuesId}/`}> [Back] </Link>
+          <Link to={`/values/${valuesId}/`}> [Add your story] </Link>
           <h1 style={headerStyle}>{this.headerText()}</h1>
           <div style={storyContainerStyle}>
             <span style={promptStyle}>{this.state.value ? this.state.value.prompt : undefined}</span>
             <span>{this.state.story ? this.state.story.story.text : undefined} </span>
           </div>
 
-          <div style={reactionSectionStyle}>
-            <h3 style={reactionHeaderStyle}>How did this story make you feel?</h3>
-            {reactions.map(reaction => <span key={reaction}>{reaction}</span>)}
-          </div>
+          <ReactionList story={this.state.story} />
         </div>
       )
   }
