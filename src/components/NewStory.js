@@ -101,7 +101,7 @@ class NewStory extends Component {
 
     return (
       <div>
-        <Link to="/"> [Back] </Link>
+        <Link to={"/stories/"+this.props.params.valueId}> [Back] </Link>
         <h1> {valueName} </h1>
         <h2> {prompt} </h2>
 

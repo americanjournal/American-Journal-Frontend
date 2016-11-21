@@ -61,6 +61,7 @@ const storyStyleSmallDark = {
       "margin": "3px 3px 3px 3px",
       "float": "left",
       "alignItems": "center",
+      "display": "flex",
       "justifyContent": "center",
       "backgroundColor" : "#F9F9F9"
     }
