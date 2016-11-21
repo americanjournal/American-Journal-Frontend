@@ -17,7 +17,6 @@ const storyStyle1 = {
       "height": "150px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "fontSize": "13px",
       "border" : "1px solid black",
       "boxShadow": "5px 5px 2px #888888",
       "borderRadius": "5px",
@@ -30,7 +29,6 @@ const storyStyleA = {
       "height": "300px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "fontSize": "13px",
       "border" : "1px solid black",
       "boxShadow": "5px 5px 2px #888888",
       "borderRadius": "5px",
@@ -44,7 +42,6 @@ const storyStyleB = {
       "height": "150px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "fontSize": "8px",
       "border" : "1px solid black",
       "boxShadow": "5px 5px 2px #888888",
       "borderRadius": "5px",
@@ -95,7 +92,6 @@ export class Stories extends Component {
       });
   }
 
-
     addButton(){
       return (
         <div style={addButtonStyle}>
@@ -107,6 +103,24 @@ export class Stories extends Component {
         </div>
         )
     }
+
+    scaleSize(textstuff){
+      const textlength = textstuff.length;
+      console.log('The length'+textlength);
+
+      if (textlength < 30){
+        return <h1>{textstuff}</h1>
+      }
+      else if (textlength < 50){
+        return <h2>{textstuff}</h2>
+      }
+      else if (textlength < 100){
+        return <h3>{textstuff}</h3>
+      }
+      else {
+        return <p>{textstuff}</p>
+      }
+      }
 
     styleStories(storyList) {
       storyList.map(function(story, idx){
@@ -131,7 +145,7 @@ export class Stories extends Component {
         <div style={contDiv}>
 
         <div style={storyStyle1}>
-        {story1}
+        {this.scaleSize(story1)}
         </div>
 
         <div style={halfDiv}>
@@ -139,16 +153,16 @@ export class Stories extends Component {
         {this.addButton()}
         </div>
         <div style={storyStyleA}>
-        {story2}
+        {this.scaleSize(story2)}
         </div>
         </div>
 
         <div style={halfDiv}>
         <div style={storyStyleA}>
-        {story3}
+        {this.scaleSize(story3)}
         </div>
         <div style={storyStyleB}>
-        {story4}
+        {this.scaleSize(story4)}
         </div>
         </div>
 
