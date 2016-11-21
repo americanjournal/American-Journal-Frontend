@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import addbutton from './addbutton.png';
+import StoryCell from './StoryCell';
+
+const pageDiv = {
+  "width" : "100%",
+  "padding": "10px 10px 10px 10px"
+}
 
 const contDiv = {
   "margin":"auto",
@@ -17,37 +23,46 @@ const storyStyle1 = {
       "height": "150px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "border" : "1px solid black",
-      "boxShadow": "5px 5px 2px #888888",
+      // "border" : "1px solid black",
+      "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
       "borderRadius": "5px",
       "padding": "5px 5px 5px 5px",
-      "margin": "3px 3px 3px 3px"
+      "margin": "3px 3px 3px 3px",
+      "display": "flex",
+      "alignItems": "center",
+      "justifyContent": "center"
     }
 
-const storyStyleA = {
+const storyStyleBigLight = {
       "width": "90%",
       "height": "300px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "border" : "1px solid black",
-      "boxShadow": "5px 5px 2px #888888",
+      // "border" : "1px solid black",
+      "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
       "borderRadius": "5px",
       "padding": "5px 5px 5px 5px",
       "margin": "3px 3px 3px 3px",
-      "float": "left"
+      "float": "left",
+      "display": "flex",
+      "alignItems": "center",
+      "justifyContent": "center"
     }
 
-const storyStyleB = {
+const storyStyleSmallDark = {
       "width": "90%",
       "height": "150px",
       "overflow" : "hidden",
       lineHeight: "36px",
-      "border" : "1px solid black",
-      "boxShadow": "5px 5px 2px #888888",
+      // "border" : "1px solid black",
+      "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
       "borderRadius": "5px",
       "padding": "5px 5px 5px 5px",
       "margin": "3px 3px 3px 3px",
-      "float": "left"
+      "float": "left",
+      "alignItems": "center",
+      "justifyContent": "center",
+      "backgroundColor" : "#F9F9F9"
     }
 
 const addButtonStyle = {
@@ -96,8 +111,8 @@ export class Stories extends Component {
       return (
         <div style={addButtonStyle}>
         <p></p>
-        <Link to={"/newstory/{this.valueId}"}>
-        <img src={addbutton} height="50%" width="50%" />
+        <Link to={"/newstory/"+this.state.value.id}>
+        <img src={addbutton} height="100%" />
         <p>Add your story</p>
         </Link>
         </div>
@@ -106,7 +121,6 @@ export class Stories extends Component {
 
     scaleSize(textstuff){
       const textlength = textstuff.length;
-      console.log('The length'+textlength);
 
       if (textlength < 30){
         return <h1>{textstuff}</h1>
@@ -122,48 +136,64 @@ export class Stories extends Component {
       }
       }
 
-    styleStories(storyList) {
-      storyList.map(function(story, idx){
-        if (idx % 2 == 0){
-          return <div style={storyStyleA}>{story}</div>
-        }
-        else {
-          return <div style={storyStyleB}>{story}</div>
-        }
-      })
-    }
-
     displayStories() {
+      var valueId = this.state.value.id;
+
       var storyData = this.state.stories;
-      var story1 = storyData[0].story;
-      var story2 = storyData[1].story;
-      var story3 = storyData[2].story;
-      var story4 = storyData[3].story;
-      var story5 = storyData[4].story;
+      var story1 = storyData.shift();
+
+      var half_length = Math.ceil(storyData.length / 2);
+      var leftSide = storyData.slice(0, half_length);
+      var rightSide = storyData.slice(half_length, storyData.length);
 
       return (
         <div style={contDiv}>
 
         <div style={storyStyle1}>
-        {this.scaleSize(story1)}
+        <Link to={'/stories/'+valueId+'/'+story1.id}> {this.scaleSize(story1.story)} </Link>
         </div>
 
         <div style={halfDiv}>
-        <div style={storyStyleB}>
+        <div style={storyStyleSmallDark}>
+
         {this.addButton()}
+
         </div>
-        <div style={storyStyleA}>
-        {this.scaleSize(story2)}
-        </div>
+        {leftSide.map(function(astory,idx){
+          if (idx%2 === 0){
+            return (<StoryCell
+              storyLink={'/stories/'+valueId+'/'+astory.id}
+              cellStyle={storyStyleBigLight}
+              storyText={astory.story}
+              />)
+          }
+          else {
+            return (<StoryCell
+              storyLink={'/stories/'+valueId+'/'+astory.id}
+              cellStyle={storyStyleSmallDark}
+              storyText={astory.story}
+              />)
+          }
+          })}
         </div>
 
         <div style={halfDiv}>
-        <div style={storyStyleA}>
-        {this.scaleSize(story3)}
-        </div>
-        <div style={storyStyleB}>
-        {this.scaleSize(story4)}
-        </div>
+        {rightSide.map(function(astory,idx){
+          if (idx%2 === 0){
+            return (<StoryCell
+              storyLink={'/stories/'+valueId+'/'+astory.id}
+              cellStyle={storyStyleBigLight}
+              storyText={astory.story}
+              />)
+          }
+          else {
+            return (<StoryCell
+              storyLink={'/stories/'+valueId+'/'+astory.id}
+              cellStyle={storyStyleSmallDark}
+              storyText={astory.story}
+              />)
+          }
+          })}
         </div>
 
         </div>
@@ -172,7 +202,7 @@ export class Stories extends Component {
 
     render() {
       return (
-        <div>
+        <div style={pageDiv}>
           <h3>{!this.state.value ? "" : this.state.value.name}  </h3>
           <p> {!this.state.value ? "" : this.state.value.prompt} </p>
           {this.state.stories ? this.displayStories() : undefined }
