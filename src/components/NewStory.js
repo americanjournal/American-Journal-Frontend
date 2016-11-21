@@ -6,7 +6,7 @@ class NewStory extends Component {
     super();
 
     this.state = {
-      story: undefined
+      story: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -57,7 +57,7 @@ class NewStory extends Component {
 
   handleTextChange(event) {
     this.setState({
-        story: event.target.value
+        story: event.target.value.slice(0, 500)
     });
   }
 
@@ -88,6 +88,17 @@ class NewStory extends Component {
       "text-align": "center",
     }
 
+    const characterLimitStyles = {
+        "text-align": "right",
+        "color": "rgb(187, 187, 187)",
+        "padding-right": "10px",
+        "padding-bottom": "10px",
+        "font-size": "12px",
+    }
+
+    const story = this.state.story
+    const charactersLeft = 500 - story.length
+
     return (
       <div>
         <Link to="/"> [Back] </Link>
@@ -95,7 +106,8 @@ class NewStory extends Component {
         <h2> {prompt} </h2>
 
           <form onSubmit={this.handleSubmit} style={formStyle}>
-          <textarea value={this.state.story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
+          <textarea value={story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
+          <div style={characterLimitStyles}>{charactersLeft} characters left</div>
           <input type="submit" value="Submit Story" style={buttonStyle} />
         </form>
       </div>
