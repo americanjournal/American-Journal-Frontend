@@ -4,7 +4,7 @@ import addbutton from './addbutton.png';
 import StoryCell from './StoryCell';
 
 const pageDiv = {
-  "width" : "100%",
+  "width" : "95%",
   "padding": "10px 10px 10px 10px"
 }
 
