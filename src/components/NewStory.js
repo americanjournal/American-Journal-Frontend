@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Textarea from 'react-textarea-autosize';
-import RefreshLocation from 'react-router';
 
 class NewStory extends Component {
   constructor() {
@@ -36,6 +35,11 @@ class NewStory extends Component {
       console.log(response);
     });
   }
+
+  // handleSubmit(event){
+  //   event.preventDefault()
+  //   console.log('Newstory is'+this.props.valueId)
+  // }
 
 
   handleTextChange(event) {

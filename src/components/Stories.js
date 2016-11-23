@@ -79,6 +79,7 @@ export class Stories extends Component {
   componentDidMount() {
     var paramValueId = this.props.params && this.props.params.storiesid
     var valueId = this.state.valueId  || paramValueId
+
     this.state.valueId = valueId
     const host = 'https://fast-fjord-29570.herokuapp.com/';
     const url = `${host}values/${valueId}.json`;
@@ -179,7 +180,7 @@ export class Stories extends Component {
         <div style={halfDiv}>
         <div style={storyStyleSmallDark}>
 
-        <NewStory valueId={this.props.params.storiesid} />
+        <NewStory valueId={this.props.valueId ? 1 : this.props.params.storiesid } />
 
         </div>
         {leftSide.map(function(astory,idx){
