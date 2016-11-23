@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import addbutton from './addbutton.png';
 import StoryCell from './StoryCell';
+import NewStory from './NewStory';
 
 const pageDiv = {
   "width" : "95%",
@@ -20,8 +21,6 @@ const halfDiv = {
 
 const storyStyle1 = {
       "width": "95%",
-      "height": "150px",
-      "overflow" : "hidden",
       lineHeight: "36px",
       // "border" : "1px solid black",
       "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
@@ -35,8 +34,6 @@ const storyStyle1 = {
 
 const storyStyleBigLight = {
       "width": "90%",
-      "height": "300px",
-      "overflow" : "hidden",
       lineHeight: "36px",
       // "border" : "1px solid black",
       "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
@@ -51,8 +48,6 @@ const storyStyleBigLight = {
 
 const storyStyleSmallDark = {
       "width": "90%",
-      "height": "150px",
-      "overflow" : "hidden",
       lineHeight: "36px",
       // "border" : "1px solid black",
       "boxShadow": "0px 1px 2px #B1B1B3, -2px 1px 3px #B1B1B3, 2px 1px 3px #B1B1B3",
@@ -137,13 +132,40 @@ export class Stories extends Component {
       }
       }
 
+    findMiddleStoryWhenDisplayed(storyArray){
+      var charMiddle = 0;
+
+      var allStoriesTotal = 0;
+      for (var i = 0; i<storyArray.length; i++){
+        allStoriesTotal += storyArray[i].story.length;
+      }
+
+      var charTotal = 0;
+      for (var i = 0; i<storyArray.length; i++) {
+        charTotal += storyArray[i].story.length;
+        if (charTotal > allStoriesTotal/2){
+          charMiddle = i;
+          break;
+        }
+      }
+
+      var halfArray = Math.ceil(storyArray.length / 2);
+
+      var bestMiddle = Math.ceil((charMiddle+halfArray)/2);
+
+      return bestMiddle
+
+    }
+
     displayStories() {
       var valueId = this.state.value.id;
 
       var storyData = this.state.stories;
       var story1 = storyData.shift();
+      console.log(storyData)
 
-      var half_length = Math.ceil(storyData.length / 2);
+      // var half_length = Math.ceil(storyData.length / 2);
+      var half_length = this.findMiddleStoryWhenDisplayed(storyData);
       var leftSide = storyData.slice(0, half_length);
       var rightSide = storyData.slice(half_length, storyData.length);
 
@@ -151,13 +173,13 @@ export class Stories extends Component {
         <div style={contDiv}>
 
         <div style={storyStyle1}>
-        <Link to={'/stories/'+valueId+'/'+story1.id}> {this.scaleSize(story1.story)} </Link>
+        {this.scaleSize(story1.story)}
         </div>
 
         <div style={halfDiv}>
         <div style={storyStyleSmallDark}>
 
-        {this.addButton()}
+        <NewStory valueId={this.props.params.storiesid} />
 
         </div>
         {leftSide.map(function(astory,idx){

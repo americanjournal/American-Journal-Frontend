@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import Textarea from 'react-textarea-autosize';
+import RefreshLocation from 'react-router';
 
 class NewStory extends Component {
   constructor() {
@@ -13,28 +14,10 @@ class NewStory extends Component {
     this.handleTextChange = this.handleTextChange.bind(this)
   }
 
-  componentWillMount() {
-    var valueId = this.props.params.valueId;
-
-    const host = 'https://fast-fjord-29570.herokuapp.com/';
-    const url = `${host}/values/${valueId}.json`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(function(value) {
-        this.setState(
-          { valueName: value.name,
-            prompt: value.prompt
-          });
-      }.bind(this))
-      .catch(error => {
-        console.log(error)
-      });
-    }
-
   handleSubmit(event) {
     event.preventDefault()
-    const valueId = this.props.params.valueId;
+    const valueId = this.props.valueId;
+    console.log('yo'+valueId)
     const host = 'https://fast-fjord-29570.herokuapp.com/'
     const url = `${host}values/${valueId}/stories.json`;
 
@@ -52,8 +35,8 @@ class NewStory extends Component {
     }).then(function(response){
       console.log(response);
     });
-
   }
+
 
   handleTextChange(event) {
     this.setState({
@@ -62,38 +45,42 @@ class NewStory extends Component {
   }
 
   render() {
-    const prompt = this.state.prompt
-    const valueName = this.state.valueName
     const placeholderText = "Add your story here"
 
+    const hideStyle = {
+        display: 'none'
+    }
+
     const textAreaStyle = {
-      "width": "100%",
+      "width": "95%",
       "font": "inherit",
-      "height": "160px"
+      "resize": "none",
+      "backgroundColor" : "#F9F9F9",
+      "border": "none"
     }
 
     const buttonStyle = {
       "width": "80%",
       "height": "36px",
-      "line-height": "36px",
+      "lineHeight": "36px",
       "color": "white",
-      "background-color": "rgb(24, 67, 161)",
-      "font-size": "24px",
+      "backgroundColor": "rgb(24, 67, 161)",
+      "fontSize": "24px",
       "border": "none",
-      "border-radius": "5px",
+      "borderRadius": "5px",
       "font": "inherit"
     }
 
     const formStyle = {
-      "text-align": "center",
+      "textAlign": "center",
     }
 
     const characterLimitStyles = {
-        "text-align": "right",
+        "textAlign": "right",
         "color": "rgb(187, 187, 187)",
-        "padding-right": "10px",
-        "padding-bottom": "10px",
-        "font-size": "12px",
+        "paddingRight": "10px",
+        "paddingBottom": "10px",
+        "fontSize": "12px",
     }
 
     const story = this.state.story
@@ -101,12 +88,8 @@ class NewStory extends Component {
 
     return (
       <div>
-        <Link to={"/stories/"+this.props.params.valueId}> [Back] </Link>
-        <h1> {valueName} </h1>
-        <h2> {prompt} </h2>
-
           <form onSubmit={this.handleSubmit} style={formStyle}>
-          <textarea value={story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
+          <Textarea value={story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
           <div style={characterLimitStyles}>{charactersLeft} characters left</div>
           <input type="submit" value="Submit Story" style={buttonStyle} />
         </form>

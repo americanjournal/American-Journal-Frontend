@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 export class StoryCell extends Component {
   constructor(valueId) {
@@ -30,15 +29,13 @@ export class StoryCell extends Component {
       }
 
     render() {
-      const storyLink = this.props.storyLink;
+      // const storyLink = this.props.storyLink;
       const cellStyle = this.props.cellStyle;
       const storyText = this.props.storyText;
       return (
-        <Link to={storyLink}>
         <div style={cellStyle}>
         {this.scaleSize(storyText)}
         </div>
-        </Link>
       )
     }
 }
