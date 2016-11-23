@@ -6,11 +6,23 @@ class NewStory extends Component {
     super();
 
     this.state = {
-      story: ""
+      story: "",
+      showThanks: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleTextChange = this.handleTextChange.bind(this)
+    this.thankReload = this.thankReload.bind(this)
+  }
+
+
+  thankReload(){
+    this.setState({showThanks: true});
+
+    setTimeout(function(){
+      this.setState({showThanks: false});
+      location.reload();
+    }.bind(this), 3000);
   }
 
   handleSubmit(event) {
@@ -32,15 +44,10 @@ class NewStory extends Component {
       method: 'post',
       body: body
     }).then(function(response){
-      console.log(response);
+      console.log(response);      
     });
+    this.thankReload();
   }
-
-  // handleSubmit(event){
-  //   event.preventDefault()
-  //   console.log('Newstory is'+this.props.valueId)
-  // }
-
 
   handleTextChange(event) {
     this.setState({
@@ -90,13 +97,23 @@ class NewStory extends Component {
     const story = this.state.story
     const charactersLeft = 500 - story.length
 
+    var submitField = (
+        <form onSubmit={this.handleSubmit} style={formStyle}>
+        <Textarea value={story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
+        <div style={characterLimitStyles}>{charactersLeft} characters left</div>
+        <input type="submit" value="Submit" style={buttonStyle} />
+      </form>
+      )
+
+    var thankField = (
+      <div>
+      <h2> Submitted Thank you! </h2>
+      </div>
+      )
+
     return (
       <div>
-          <form onSubmit={this.handleSubmit} style={formStyle}>
-          <Textarea value={story} onChange={this.handleTextChange} style={textAreaStyle} placeholder={placeholderText}/>
-          <div style={characterLimitStyles}>{charactersLeft} characters left</div>
-          <input type="submit" value="Submit Story" style={buttonStyle} />
-        </form>
+      {this.state.showThanks ? thankField : submitField}
       </div>
     )
   }

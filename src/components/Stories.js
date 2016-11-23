@@ -116,23 +116,6 @@ export class Stories extends Component {
         )
     }
 
-    scaleSize(textstuff){
-      const textlength = textstuff.length;
-
-      if (textlength < 30){
-        return <h1>{textstuff}</h1>
-      }
-      else if (textlength < 50){
-        return <h2>{textstuff}</h2>
-      }
-      else if (textlength < 100){
-        return <h3>{textstuff}</h3>
-      }
-      else {
-        return <p>{textstuff}</p>
-      }
-      }
-
     findMiddleStoryWhenDisplayed(storyArray){
       var charMiddle = 0;
 
@@ -152,7 +135,7 @@ export class Stories extends Component {
 
       var halfArray = Math.ceil(storyArray.length / 2);
 
-      var bestMiddle = Math.ceil((charMiddle+halfArray)/2);
+      var bestMiddle = Math.ceil((charMiddle-1+halfArray)/2);
 
       return bestMiddle
 
@@ -173,9 +156,10 @@ export class Stories extends Component {
       return (
         <div style={contDiv}>
 
-        <div style={storyStyle1}>
-        {this.scaleSize(story1.story)}
-        </div>
+
+        <StoryCell 
+        cellStyle={storyStyle1}
+        storyText={story1.story} />
 
         <div style={halfDiv}>
         <div style={storyStyleSmallDark}>

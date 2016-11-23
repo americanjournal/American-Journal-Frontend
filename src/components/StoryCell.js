@@ -15,10 +15,10 @@ export class StoryCell extends Component {
       const textlength = textstuff.length;
 
       if (textlength < 30){
-        return <h1>{textstuff}</h1>
+        return <h2>{textstuff}</h2>
       }
       else if (textlength < 50){
-        return <h2>{textstuff}</h2>
+        return <h3>{textstuff}</h3>
       }
       else if (textlength < 100){
         return <h3>{textstuff}</h3>
